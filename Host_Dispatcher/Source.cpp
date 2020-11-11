@@ -13,24 +13,33 @@ Process* MakeProcess(string);
 
 int main()
 {
+    int badProcesses = 0;
     Process* currentProcess = new Process();
     ProcessManager* processManager = new ProcessManager();
 	string line;
 	ifstream inFile;
-	inFile.open("processes.txt");
+	inFile.open("Processes.txt");
 	if (!inFile) 
 	{
 		cout << "Error opening file" << endl;
 		return 1; 
 	}
-
     while (getline(inFile, line))
     {
-        currentProcess = MakeProcess(line);
-        processManager->AddProcess(currentProcess);// this should start a thread in the p-man
-        currentProcess = nullptr;
+        try
+        {
+            currentProcess = MakeProcess(line);
+            processManager->AddProcess(currentProcess);// this should start a thread in the p-man
+            currentProcess = nullptr;
+        }
+        catch (const std::invalid_argument& ia)
+        {
+            cout << ia.what() << endl;
+            badProcesses++;
+            continue;
+        }
     }
-    //after done reading main thread should wait for spawned thread here to finish processing
+    cout << "Bad: " << badProcesses << endl;
 	return 0;
 }
 
