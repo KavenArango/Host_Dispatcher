@@ -38,12 +38,11 @@ int main()
 Process* MakeProcess(string line)
 {
     string info;
-    string processInfo[4];
+    string processInfo[8];
     int j = 0;
-    Process* tempNode = new Process();
     for (int i = 0; i <= line.length(); i++)
     {
-        if (line[i] == ' ')
+        if (line[i] == ' ' || i == line.length())
         {
             if (info != "")
             {
@@ -60,5 +59,6 @@ Process* MakeProcess(string line)
             }
         }
     }
+    Process* tempNode = new Process(processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4], processInfo[5], processInfo[6], processInfo[7]);
     return tempNode;
 }

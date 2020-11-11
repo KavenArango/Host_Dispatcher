@@ -12,7 +12,7 @@ public:
 	
 	ProcessManager();
 
-	void AddProcess(Process*); 
+	void AddProcess(Process*); // check if priority is correct
 	void CheckQueue();
 
 

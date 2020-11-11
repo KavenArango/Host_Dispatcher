@@ -7,8 +7,8 @@ class Process
 public:
 
 	Process();
-	Process(int, float, int, int);
-	
+	Process(int, float, int, int, int, int, int, int);
+	Process(string, string, string, string, string, string, string, string);
 
 	
 	int GetPriority();
@@ -34,16 +34,37 @@ public:
 	
 	int GetID();
 	void SetID(int);
+
+	
+	int GetPrintersNeeded();
+	void SetPrintersNeeded(string);
+	void SetPrintersNeeded(int);
+
+	
+	int GetScannersNeeded();
+	void SetScannersNeeded(string);
+	void SetScannersNeeded(int);
+
+
+	int GetModemsNeeded();
+	void SetModemsNeeded(string);
+	void SetModemsNeeded(int);
+
+	int GetCDsNeeded();
+	void SetCDsNeeded(string);
+	void SetCDsNeeded(int);
 	
 	~Process();
 private:
+	string RemoveSpaceAndAlpha(string);
+	bool CheckIfInt(string);
 	int ID;
 	int priority;
 	float processTime;
 	int arrivalTime;
 	int mBytes;
 
-	int printers; // TODO MAKE GET SET FOR RESOURCES
+	int printers;
 	int scanners;
 	int modems;
 	int CDs;

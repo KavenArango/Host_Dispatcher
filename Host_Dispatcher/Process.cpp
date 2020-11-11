@@ -2,18 +2,192 @@
 
 
 
-
 Process::Process()
 {}
-Process::Process(int pri, float pTime, int aTime, int mem)
+Process::Process(int pri, float pTime, int aTime, int mem, int newPrint, int newScanner, int newModem, int newCDs)
 {
     SetPriority(pri);
     SetProcessTime(pTime);
     SetArrivalTime(aTime);
     SetMBytes(mem);
+
+    SetPrintersNeeded(newPrint);
+    SetScannersNeeded(newScanner);
+    SetModemsNeeded(newModem);
+    SetCDsNeeded(newCDs);
+}
+Process::Process(string pri, string pTime, string aTime, string mem, string newPrint, string newScanner, string newModem, string newCDs)
+{
+    SetPriority(pri);
+    SetProcessTime(pTime);
+    SetArrivalTime(aTime);
+    SetMBytes(mem);
+
+    SetPrintersNeeded(newPrint);
+    SetScannersNeeded(newScanner);
+    SetModemsNeeded(newModem);
+    SetCDsNeeded(newCDs);
 }
 Process::~Process()
 {}
+
+
+
+string Process::RemoveSpaceAndAlpha(string word)
+{
+    remove_if(word.begin(), word.end(), isspace);
+    remove_if(word.begin(), word.end(), isalpha);
+    return word;
+}
+bool Process::CheckIfInt(string testInt)
+{
+    for (int i = 0; i < testInt.size(); i++)
+    {
+        if (testInt[i] == '.')
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+
+
+int Process::GetModemsNeeded()
+{
+    return modems;
+}
+void Process::SetModemsNeeded(string newModem)
+{
+    int test;
+    newModem = RemoveSpaceAndAlpha(newModem);
+    if (CheckIfInt(newModem))
+    {
+        throw "Invalid Modems used, Modems must be an integer, Modems given: ", newModem;
+    }
+    if (newModem.size() == 0)
+    {
+        throw "Invalid Modems used Modems used may not be null Modems given: ", newModem;
+    }
+    test = stoi(newModem);
+    if (test < 0)
+    {
+        throw "Invalid Modems used Modems must be 0 or more, Modems given: ", newModem;
+    }
+    modems = test;
+}
+void Process::SetModemsNeeded(int newModem)
+{
+    if (newModem < 0)
+    {
+        throw "Invalid Modems used Modems must be 0 or more, Modems given: ", newModem;
+    }
+    modems = newModem;
+}
+
+
+
+int Process::GetCDsNeeded()
+{
+    return CDs;
+}
+void Process::SetCDsNeeded(string newCDs)
+{
+    int test;
+    newCDs = RemoveSpaceAndAlpha(newCDs);
+    if (CheckIfInt(newCDs))
+    {
+        throw "Invalid CDs used, CDs must be an integer, CDs given: ", newCDs;
+    }
+    if (newCDs.size() == 0)
+    {
+        throw "Invalid CDs used CDs used may not be null CDs given: ", newCDs;
+    }
+    test = stoi(newCDs);
+    if (test < 0)
+    {
+        throw "Invalid CDs used CDs must be 0 or more, CDs given: ", newCDs;
+    }
+    modems = test;
+}
+void Process::SetCDsNeeded(int newCDs)
+{
+    if (newCDs < 0)
+    {
+        throw "Invalid Modems used Modems must be 0 or more, Modems given: ", newCDs;
+    }
+    modems = newCDs;
+}
+
+
+
+int Process::GetScannersNeeded()
+{
+    return scanners;
+}
+void Process::SetScannersNeeded(string newScan)
+{
+    int testPri;
+    newScan = RemoveSpaceAndAlpha(newScan);
+    if (CheckIfInt(newScan))
+    {
+        throw "Invalid Scanners used, scanners must be an integer, Scanners given: ", newScan;
+    }
+    if (newScan.size() == 0)
+    {
+        throw "Invalid Scanners used scanners used may not be null Scanners given: ", newScan;
+    }
+    testPri = stoi(newScan);
+    if (testPri < 0)
+    {
+        throw "Invalid printers used printers must be 0 or more, printers given: ", testPri;
+    }
+    scanners = testPri;
+}
+void Process::SetScannersNeeded(int newScan)
+{
+    if (newScan < 0)
+    {
+        throw "Invalid printers used printers must be 0 or more, printers given: ", newScan;
+    }
+    scanners = newScan;
+}
+
+
+
+int Process::GetPrintersNeeded()
+{
+    return printers;
+}
+void Process::SetPrintersNeeded(string newPrint)
+{
+    int testPri;
+    newPrint = RemoveSpaceAndAlpha(newPrint);
+    
+    if (CheckIfInt(newPrint))
+    {
+        throw "Invalid printers used, printers must be an integer, printers given: ", newPrint;
+    }
+    if (newPrint.size() == 0)
+    {
+        throw "Invalid printers used printers used may not be null printers given: ", newPrint;
+    }
+
+    testPri = stoi(newPrint);
+    if (testPri < 0)
+    {
+        throw "Invalid printers used printers must be 0 or more, printers given: ", testPri;
+    }
+    printers = testPri;
+}
+void Process::SetPrintersNeeded(int newPrint)
+{
+    if (newPrint < 0)
+    {
+        throw "Invalid printers used printers must be 0 or more, printers given: ", newPrint;
+    }
+    printers = newPrint;
+}
 
 
 
@@ -35,27 +209,25 @@ int Process::GetPriority()
 void Process::SetPriority(string newPri)
 {
     int testPri;
-    remove_if(newPri.begin(), newPri.end(), isspace);
-    remove_if(newPri.begin(), newPri.end(), isalpha);
-    for (int i = 0; i < newPri.size(); i++)
+    newPri = RemoveSpaceAndAlpha(newPri);
+    
+    if (CheckIfInt(newPri))
     {
-        if (newPri[i] == '.')
-        {
-            throw "Invalid priortiy integer only, priority given:", newPri;
-        }
+        throw "Invalid priortiy integer only, priority given:", newPri;
     }
+    
     testPri = stoi(newPri);
-    if (testPri != 1 && testPri != 2 && testPri != 3 && testPri != 4) // a point of contention this needs to be reviewed do not delete untill reviewed
+    if (testPri < 0 )
     {
-        throw "Invalid priortiy allowed range 1-4, priority given: ", testPri;
+        throw "Invalid priortiy must be a positive integer: ", testPri;
     }
         priority = testPri;
 }
 void Process::SetPriority(int newPriority)
 {
-    if (newPriority != 1 && newPriority != 2 && newPriority != 3 && newPriority != 4) // this needs to be reviewed do no ignore this needs to be reviewed before comment is deleted
+    if (newPriority < 0)
     {
-        throw "Invalid priortiy allowed range 1-4, priority given: ", newPriority;
+        throw "Invalid priortiy must be a positive integer: ", newPriority;
     }
     priority = newPriority;
 }
@@ -69,8 +241,7 @@ float Process::GetProcessTime()
 void Process::SetProcessTime(string newPTime)
 {
     float testPTime;
-    remove_if(newPTime.begin(), newPTime.end(), isspace);
-    remove_if(newPTime.begin(), newPTime.end(), isalpha);
+    newPTime = RemoveSpaceAndAlpha(newPTime);
     testPTime = stoi(newPTime);
 
     if (testPTime < 0)
@@ -96,16 +267,13 @@ int Process::GetArrivalTime()
 void Process::SetArrivalTime(string newATime)
 {
     int testATime;
-    remove_if(newATime.begin(), newATime.end(), isspace);
-    remove_if(newATime.begin(), newATime.end(), isalpha);
+    newATime = RemoveSpaceAndAlpha(newATime);
     testATime = stoi(newATime);
     
-    for (int i = 0; i < newATime.size(); i++)
+
+    if (CheckIfInt(newATime))
     {
-        if (newATime[i] == '.')
-        {
-            throw "Invalid Arrival time integer only, Arrival time given:", newATime;
-        }
+        throw "Invalid Arrival time integer only, Arrival time given:", newATime;
     }
 
     if (testATime < 0)
@@ -131,15 +299,13 @@ int Process::GetMBytes()
 void Process::SetMBytes(string newMem)
 {
     int testMem;
-    remove_if(newMem.begin(), newMem.end(), isspace);
-    remove_if(newMem.begin(), newMem.end(), isalpha);
-    for (int i = 0; i < newMem.size(); i++)
+    newMem = RemoveSpaceAndAlpha(newMem);
+    
+    if (CheckIfInt(newMem))
     {
-        if (newMem[i] == '.')
-        {
-            throw "Invalid Memory can only be integer, memory given:", newMem;
-        }
+        throw "Invalid Memory can only be integer, memory given:", newMem;
     }
+    
     testMem = stoi(newMem);
     
     if (testMem < 0)
