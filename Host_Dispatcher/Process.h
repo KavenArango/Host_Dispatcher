@@ -7,7 +7,7 @@ class Process
 public:
 
 	Process();
-	Process(int, float, int, int, int, int, int, int);
+	Process(int, int, float, int, int, int, int, int);
 	Process(string, string, string, string, string, string, string, string);
 
 	
@@ -59,9 +59,9 @@ private:
 	string RemoveSpaceAndAlpha(string);
 	bool CheckIfInt(string);
 	int ID;
+	int arrivalTime;
 	int priority;
 	float processTime;
-	int arrivalTime;
 	int mBytes;
 
 	int printers;

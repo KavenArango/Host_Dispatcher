@@ -4,7 +4,7 @@
 
 Process::Process()
 {}
-Process::Process(int pri, float pTime, int aTime, int mem, int newPrint, int newScanner, int newModem, int newCDs)
+Process::Process(int aTime,int pri, float pTime, int mem, int newPrint, int newScanner, int newModem, int newCDs)
 {
     SetPriority(pri);
     SetProcessTime(pTime);
@@ -16,7 +16,7 @@ Process::Process(int pri, float pTime, int aTime, int mem, int newPrint, int new
     SetModemsNeeded(newModem);
     SetCDsNeeded(newCDs);
 }
-Process::Process(string pri, string pTime, string aTime, string mem, string newPrint, string newScanner, string newModem, string newCDs)
+Process::Process(string aTime, string pTime, string pri, string mem, string newPrint, string newScanner, string newModem, string newCDs)
 {
     SetPriority(pri);
     SetProcessTime(pTime);
