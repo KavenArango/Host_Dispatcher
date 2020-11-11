@@ -27,22 +27,19 @@ int main()
     while (getline(inFile, line))
     {
         currentProcess = MakeProcess(line);
-        processManager->AddProcess(currentProcess);
+        processManager->AddProcess(currentProcess);// this should start a thread in the p-man
         currentProcess = nullptr;
     }
-
-
-
-
-
-
+    //after done reading main thread should wait for spawned thread here to finish processing
 	return 0;
 }
 
-
+// arrival time, priority, processor time, mbytes, #printers, #scanners, #modems, #CDs
 Process* MakeProcess(string line)
 {
     string info;
+    string processInfo[4];
+    int j = 0;
     Process* tempNode = new Process();
     for (int i = 0; i <= line.length(); i++)
     {
@@ -50,7 +47,8 @@ Process* MakeProcess(string line)
         {
             if (info != "")
             {
-                
+                processInfo[j] = info;
+                j++;
                 info = "";
             }
         }

@@ -1,7 +1,13 @@
 #include "ProcessManager.h"
 
-void ProcessManager::AddProcess(Process*)
+ProcessManager::ProcessManager()
 {}
+
+void ProcessManager::AddProcess(Process*)
+{
+	// this should check if a thread is running if it isnt then it should make one
+	// should assign ID to process
+}
 
 
 void ProcessManager::CheckQueue()

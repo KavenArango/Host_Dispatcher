@@ -43,7 +43,10 @@ private:
 	int arrivalTime;
 	int mBytes;
 
-
+	int printers; // TODO MAKE GET SET FOR RESOURCES
+	int scanners;
+	int modems;
+	int CDs;
 
 };
 

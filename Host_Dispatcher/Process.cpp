@@ -3,40 +3,6 @@
 
 
 
-void Process::SetMBytes(string newMem)
-{
-    int testMem;
-    remove_if(newMem.begin(), newMem.end(), isspace);
-    remove_if(newMem.begin(), newMem.end(), isalpha);
-    for (int i = 0; i < newMem.size(); i++)
-    {
-        if (newMem[i] == '.')
-        {
-            throw "Invalid priortiy integer only, priority given:", newMem;
-        }
-    }
-    testMem = stoi(newMem);
-    if (testPri != 1 || testPri != 2 || testPri != 3 || testPri != 4)
-    {
-        throw "Invalid priortiy allowed range 1-4, priority given: ", testPri;
-    }
-    priority = testPri;
-}
-
-
-
-
-void Process::SetMBytes(int)
-{
-
-}
-
-
-
-
-
-
-
 Process::Process()
 {}
 Process::Process(int pri, float pTime, int aTime, int mem)
@@ -57,7 +23,7 @@ int Process::GetID()
 }
 void Process::SetID(int newID)
 {
-    ID = newID
+    ID = newID;
 }
 
 
@@ -79,7 +45,7 @@ void Process::SetPriority(string newPri)
         }
     }
     testPri = stoi(newPri);
-    if (testPri != 1 || testPri != 2 || testPri != 3 || testPri != 4)
+    if (testPri != 1 && testPri != 2 && testPri != 3 && testPri != 4) // a point of contention this needs to be reviewed do not delete untill reviewed
     {
         throw "Invalid priortiy allowed range 1-4, priority given: ", testPri;
     }
@@ -87,7 +53,7 @@ void Process::SetPriority(string newPri)
 }
 void Process::SetPriority(int newPriority)
 {
-    if (newPriority != 1 || newPriority != 2 || newPriority != 3 || newPriority != 4)
+    if (newPriority != 1 && newPriority != 2 && newPriority != 3 && newPriority != 4) // this needs to be reviewed do no ignore this needs to be reviewed before comment is deleted
     {
         throw "Invalid priortiy allowed range 1-4, priority given: ", newPriority;
     }
@@ -161,4 +127,32 @@ void Process::SetArrivalTime(int newATime)
 int Process::GetMBytes()
 {
     return mBytes;
+}
+void Process::SetMBytes(string newMem)
+{
+    int testMem;
+    remove_if(newMem.begin(), newMem.end(), isspace);
+    remove_if(newMem.begin(), newMem.end(), isalpha);
+    for (int i = 0; i < newMem.size(); i++)
+    {
+        if (newMem[i] == '.')
+        {
+            throw "Invalid Memory can only be integer, memory given:", newMem;
+        }
+    }
+    testMem = stoi(newMem);
+    
+    if (testMem < 0)
+    {
+        throw "Invalid Memory can only be positive numbers memory given: ", testMem;
+    }
+    mBytes = testMem;
+}
+void Process::SetMBytes(int newMem)
+{
+    if (newMem < 0)
+    {
+        throw "Invalid Memory can only be positive numbers memory given: ", newMem;
+    }
+    mBytes = newMem;
 }
