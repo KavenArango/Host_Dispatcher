@@ -28,7 +28,7 @@ int main()
     {
         currentProcess = MakeProcess(line);
         processManager->AddProcess(currentProcess);
-        currentProcess = nullptr
+        currentProcess = nullptr;
     }
 
 
@@ -43,6 +43,7 @@ int main()
 Process* MakeProcess(string line)
 {
     string info;
+    Process* tempNode = new Process();
     for (int i = 0; i <= line.length(); i++)
     {
         if (line[i] == ' ')
@@ -61,4 +62,5 @@ Process* MakeProcess(string line)
             }
         }
     }
+    return tempNode;
 }
