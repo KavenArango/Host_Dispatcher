@@ -18,13 +18,15 @@ void ProcessManager::AddProcess(Process* newProcess)
 		throw invalid_argument(error);
 	}
 	AssignQueue(newProcess);
-	CheckQueue()
+	CheckQueue();
 }
 
 
 void ProcessManager::CheckQueue()
 {
-
+	
+	
+	
 }
 
 void ProcessManager::SpawnThread()

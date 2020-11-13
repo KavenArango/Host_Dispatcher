@@ -6,11 +6,13 @@ class CPU
 {
 public:
 	CPU();
-	void SetProcess();
+	void SetProcess(Process*);
 	int GetCurrentProcessPriority();
 	Process* InterruptCurrentProcess(Process*);
+
 private:
 	void allocateResources();
 	void releaseResources();
+
 };
 
