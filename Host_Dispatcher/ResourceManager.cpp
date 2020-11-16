@@ -11,7 +11,7 @@ void ResourceManager::SpawnResource(string newResourceName)
 	resource = nullptr;
 }
 
-void ResourceManager::AllocateResources(string resourceName, int numOfResources)
+void ResourceManager::AllocateResources(string resourceName, int numOfResources, int ID)
 {
 	vector<int> resourcesUsedForThisRun;
 	bool resourceFound = false;
@@ -23,6 +23,7 @@ void ResourceManager::AllocateResources(string resourceName, int numOfResources)
 			if (resourceList[i]->GetInUse() == false)
 			{
 				resourceList[i]->SetInUse(true);
+				resourceList[i]->SetProcessID(ID);
 				numOfResources--;
 				resourcesUsedForThisRun.push_back(i);
 				if (numOfResources == 0);
