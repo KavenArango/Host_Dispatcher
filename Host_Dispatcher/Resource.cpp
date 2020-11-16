@@ -27,6 +27,10 @@ bool Resource::GetInUse()
 void Resource::SetInUse(bool newInUse)
 {
 	InUse = newInUse;
+	if (newInUse == false)
+	{
+		processID = NULL; // might not work 
+	}
 }
 
 
