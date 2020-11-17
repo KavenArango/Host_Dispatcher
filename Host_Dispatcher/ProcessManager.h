@@ -14,7 +14,7 @@ public:
 	ProcessManager();
 
 	void AddProcess(Process*); // check if priority is correct
-	void CheckQueue();
+	void CheckProcessor();
 
 
 
@@ -24,7 +24,7 @@ public:
 private:
 	
 	void SpawnThread();
-	void CheckValidPriority();
+	void CheckValidPriority(Process*);
 	Process* AssignID(Process*);
 	void Interrupt();
 	void AssignQueue(Process*);
