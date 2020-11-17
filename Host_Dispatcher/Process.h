@@ -15,7 +15,6 @@ public:
 	void SetPriority(string);
 	void SetPriority(int);
 	
-
 	
 	float GetProcessTime();
 	void SetProcessTime(string);
