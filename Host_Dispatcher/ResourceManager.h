@@ -1,19 +1,29 @@
 #pragma once
 #include "Resource.h"
 
+#include <string>
+#include <vector>
 
+using namespace std;
 
 class ResourceManager
 {
 public:
-	
-	void SpawnResource(string);
+	ResourceManager();
 
+	void SpawnResource(string);
+	void AllocateResources(string, int,int);
+	void DeAllocateResources(string, int);
 	
 	
-	
+	~ResourceManager()
+	{
+
+		resourceList.clear();
+		resourceList.shrink_to_fit();
+	}
 private:
-	
+	vector<Resource*> resourceList;
 	
 	
 	
