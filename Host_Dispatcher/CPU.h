@@ -3,6 +3,7 @@
 #include "Resource.h"
 #include <thread>
 #include <iostream>
+#include <chrono>
 using namespace std;
 class CPU
 {
@@ -16,6 +17,7 @@ public:
 	void threadJoin();
 	void SpawnThread();
 	void runProcess();
+	bool getRunStatus();
 
 private:
 	bool ThreadRunning = false;
@@ -23,5 +25,6 @@ private:
 	void releaseResources();
 	shared_ptr<Process> currentProcess = nullptr;
 	thread cpuProcess;
+	bool checkRunStatus = false;
 };
 

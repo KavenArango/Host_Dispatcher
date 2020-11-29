@@ -20,6 +20,7 @@ public:
 	void threadJoin();
 	shared_ptr<CPU> getCPU();
 	void setCPU(shared_ptr<CPU>);
+	
 
 	~ProcessManager()
 	{}
@@ -36,5 +37,6 @@ private:
 	bool ThreadRunning = false;
 	int ID = 0;
 	thread ProcessManagerThread;
+	
 };
 

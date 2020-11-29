@@ -46,7 +46,25 @@ void CPU::threadJoin()
 
 void CPU::runProcess()
 {
-	cout << currentProcess->GetID() << endl;
+	using namespace std::chrono;
+	auto starttimer = high_resolution_clock::now();
+	
+	checkRunStatus = true;
+	
+	while (currentProcess->GetProcessTime() > 0)
+	{
+		auto stoptimer = high_resolution_clock::now();
+		auto deltatime = duration_cast<microseconds>(stoptimer - starttimer);
+		
+		currentProcess->SetProcessTime(currentProcess->GetProcessTime() - deltatime.count());
+		cout << currentProcess->GetID() << endl;
+	}
+	checkRunStatus = false;
+}
+
+bool CPU::getRunStatus()
+{
+	return checkRunStatus;
 }
 
 void CPU::releaseResources()

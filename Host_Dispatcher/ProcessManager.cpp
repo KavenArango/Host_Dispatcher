@@ -41,7 +41,7 @@ void ProcessManager::addProcessToCpu()
 			processQueues[i].pop();
 		}
 	}
-	cpu->runProcess();
+	//cpu->runProcess();
 	//ThreadRunning = false;
 }
 
@@ -76,7 +76,7 @@ void ProcessManager::Interrupt()
 		}
 	}
 	
-	cpu->runProcess();
+	//cpu->runProcess();
 }
 
 void ProcessManager::AssignQueue(shared_ptr<Process> newProcess)
