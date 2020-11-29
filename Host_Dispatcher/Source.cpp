@@ -8,14 +8,16 @@
 
 using namespace std;
 
-Process* MakeProcess(string);
+shared_ptr<Process> MakeProcess(string);
 
 
 int main()
 {
     int badProcesses = 0;
-    Process* currentProcess = new Process();
-    ProcessManager* processManager = new ProcessManager();
+    shared_ptr<Process> currentProcess = shared_ptr<Process>(new Process());
+    shared_ptr<ProcessManager> processManager = shared_ptr<ProcessManager>(new ProcessManager());
+    shared_ptr<CPU> cpuClass = shared_ptr<CPU>(new CPU());
+    processManager->setCPU(cpuClass);
 	string line;
 	ifstream inFile;
 	inFile.open("Processes.txt");
@@ -39,12 +41,14 @@ int main()
             continue;
         }
     }
+    cpuClass->threadJoin();
+    processManager->threadJoin();
     cout << "Bad: " << badProcesses << endl;
 	return 0;
 }
 
 // arrival time, priority, processor time, mbytes, #printers, #scanners, #modems, #CDs
-Process* MakeProcess(string line)
+shared_ptr<Process> MakeProcess(string line)
 {
     string info;
     string processInfo[8];
@@ -68,6 +72,6 @@ Process* MakeProcess(string line)
             }
         }
     }
-    Process* tempNode = new Process(processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4], processInfo[5], processInfo[6], processInfo[7]);
+    shared_ptr<Process> tempNode(new Process(processInfo[0], processInfo[1], processInfo[2], processInfo[3], processInfo[4], processInfo[5], processInfo[6], processInfo[7]));
     return tempNode;
 }

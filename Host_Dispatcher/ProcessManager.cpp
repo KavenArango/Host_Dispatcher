@@ -7,29 +7,30 @@ ProcessManager::ProcessManager()
 
 }
 
-void ProcessManager::AddProcess(Process* newProcess)
+void ProcessManager::AddProcess(shared_ptr<Process> newProcess)
 {
-
 	// TODO: Check if a thread is running and if it isnt then it should make one
 	newProcess = AssignID(newProcess);
 	// check if priority is correct
 	CheckValidPriority(newProcess);
 	AssignQueue(newProcess);
-	addProcessToCpu();
+	if (newProcess->GetID() == 0) {
+		addProcessToCpu();
+	}
 	CheckCpu(newProcess->GetPriority());
 	if (ThreadRunning == false) {
+		cpu->SpawnThread();
 		SpawnThread();
 	}
+	
 }
 
-void ProcessManager::CheckCpu(int addedPriority)
+void ProcessManager::CheckCpu(int newPriority)
 {
-
-	if (cpu->GetCurrentProcessPriority() < addedPriority)
+	if (cpu->GetCurrentProcessPriority() < newPriority)
 	{
 		Interrupt();
 	}
-	
 }
 
 void ProcessManager::addProcessToCpu()
@@ -40,13 +41,30 @@ void ProcessManager::addProcessToCpu()
 			processQueues[i].pop();
 		}
 	}
+	cpu->runProcess();
+	//ThreadRunning = false;
+}
+
+void ProcessManager::threadJoin()
+{
+	ProcessManagerThread.join();
 	ThreadRunning = false;
+}
+
+shared_ptr<CPU> ProcessManager::getCPU()
+{
+	return cpu;
+}
+
+void ProcessManager::setCPU(shared_ptr<CPU> newCPU)
+{
+	cpu = newCPU;
 }
 
 void ProcessManager::SpawnThread()
 {
 	ThreadRunning = true;
-	thread ProcessManagerThread(&ProcessManager::addProcessToCpu, this);
+	ProcessManagerThread = thread (&ProcessManager::addProcessToCpu, this);
 }
 
 void ProcessManager::Interrupt()
@@ -57,14 +75,16 @@ void ProcessManager::Interrupt()
 			processQueues[i].pop();
 		}
 	}
+	
+	cpu->runProcess();
 }
 
-void ProcessManager::AssignQueue(Process* newProcess)
+void ProcessManager::AssignQueue(shared_ptr<Process> newProcess)
 {
 	processQueues[newProcess->GetPriority()].push(newProcess);
 }
 
-void ProcessManager::CheckValidPriority(Process* newProcess)
+void ProcessManager::CheckValidPriority(shared_ptr<Process> newProcess)
 {
 	if (newProcess->GetPriority() >= NUMPRIORITYQUEUES)
 	{
@@ -74,7 +94,7 @@ void ProcessManager::CheckValidPriority(Process* newProcess)
 	}
 }
 
-Process* ProcessManager::AssignID(Process* newProcess)
+shared_ptr<Process> ProcessManager::AssignID(shared_ptr<Process> newProcess)
 {
 	newProcess->SetID(ID);
 	ID++;

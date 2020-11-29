@@ -4,26 +4,26 @@ CPU::CPU()
 {
 }
 
-Process* CPU::getProcess()
+shared_ptr<Process> CPU::getProcess()
 {
-
-	return process;
+	return currentProcess;
 }
 
-void CPU::SetProcess(Process* newProcess)
+void CPU::SetProcess(shared_ptr<Process> newProcess)
 {
-	process = newProcess;
+	currentProcess = newProcess;
+	currentProcess;
 }
 
 int CPU::GetCurrentProcessPriority()
 {
 
-	return process->GetPriority();
+	return currentProcess->GetPriority();
 }
 
-Process* CPU::InterruptCurrentProcess(Process* newProcess)
+shared_ptr<Process> CPU::InterruptCurrentProcess(shared_ptr<Process> newProcess)
 {
-	Process* oldProcess = process;
+	shared_ptr<Process> oldProcess = currentProcess;
 	releaseResources();
 	SetProcess(newProcess);
 	return oldProcess;
@@ -31,14 +31,31 @@ Process* CPU::InterruptCurrentProcess(Process* newProcess)
 
 bool CPU::IsWorkingOnProcess()
 {
-	if (process == nullptr)
+	if (currentProcess == nullptr)
 	{
 		return false;
 	}
 	return true;
 }
 
+void CPU::threadJoin()
+{
+	cpuProcess.join();
+	ThreadRunning = false;
+}
+
+void CPU::runProcess()
+{
+	cout << currentProcess->GetID() << endl;
+}
+
 void CPU::releaseResources()
 {
 
+}
+
+void CPU::SpawnThread()
+{
+	ThreadRunning = true;
+	cpuProcess = thread(&CPU::runProcess, this);
 }

@@ -1,7 +1,5 @@
 #include "Process.h"
 
-
-
 Process::Process()
 {}
 Process::Process(int aTime,int pri, float pTime, int mem, int newPrint, int newScanner, int newModem, int newCDs)
@@ -16,7 +14,7 @@ Process::Process(int aTime,int pri, float pTime, int mem, int newPrint, int newS
     SetModemsNeeded(newModem);
     SetCDsNeeded(newCDs);
 }
-Process::Process(string aTime, string pTime, string pri, string mem, string newPrint, string newScanner, string newModem, string newCDs)
+Process::Process(string aTime, string pri, string pTime, string mem, string newPrint, string newScanner, string newModem, string newCDs)
 {
     SetPriority(pri);
     SetProcessTime(pTime);
@@ -108,7 +106,7 @@ void Process::SetCDsNeeded(string newCDs)
     {
         throw "Invalid CDs used CDs must be 0 or more, CDs given: ", newCDs;
     }
-    modems = test;
+    CDs = test;
 }
 void Process::SetCDsNeeded(int newCDs)
 {
@@ -116,7 +114,7 @@ void Process::SetCDsNeeded(int newCDs)
     {
         throw "Invalid Modems used Modems must be 0 or more, Modems given: ", newCDs;
     }
-    modems = newCDs;
+    CDs = newCDs;
 }
 
 
