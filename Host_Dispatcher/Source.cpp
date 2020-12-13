@@ -17,7 +17,7 @@ int main()
     shared_ptr<Process> currentProcess = shared_ptr<Process>(new Process());
     shared_ptr<ProcessManager> processManager = shared_ptr<ProcessManager>(new ProcessManager());
     shared_ptr<CPU> cpuClass = shared_ptr<CPU>(new CPU());
-    processManager->setCPU(cpuClass);
+    processManager->SetCPU(cpuClass);
 	string line;
 	ifstream inFile;
 	inFile.open("Processes.txt");
@@ -31,7 +31,7 @@ int main()
         try
         {
             currentProcess = MakeProcess(line);
-            processManager->AddProcess(currentProcess);// this should start a thread in the p-man
+            processManager->AddProcess(currentProcess);
             currentProcess = nullptr;
         }
         catch (const std::invalid_argument& ia)
@@ -41,9 +41,8 @@ int main()
             continue;
         }
     }
-    cpuClass->threadJoin();
-    processManager->threadJoin();
-    cout << "Bad: " << badProcesses << endl;
+
+    cout << "num of Bad processes: " << badProcesses << endl;
 	return 0;
 }
 

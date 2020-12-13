@@ -2,6 +2,10 @@
 
 ResourceManager::ResourceManager()
 {
+	SpawnResource("Printer");
+	SpawnResource("Scanner");
+	SpawnResource("Modems");
+	SpawnResource("CD");
 }
 
 void ResourceManager::SpawnResource(string newResourceName)
