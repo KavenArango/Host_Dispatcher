@@ -7,7 +7,7 @@ class Process
 public:
 
 	Process();
-	Process(int, int, float, int, int, int, int, int);
+	Process(int, int, int, int, int, int, int, int);
 	Process(string, string, string, string, string, string, string, string);
 
 	
@@ -16,9 +16,9 @@ public:
 	void SetPriority(int);
 	
 	
-	float GetProcessTime();
+	int GetProcessTime();
 	void SetProcessTime(string);
-	void SetProcessTime(float);
+	void SetProcessTime(int);
 	
 
 	

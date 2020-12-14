@@ -6,6 +6,10 @@ ResourceManager::ResourceManager()
 	SpawnResource("Scanner");
 	SpawnResource("Modems");
 	SpawnResource("CD");
+	SpawnResource("Printer");
+	SpawnResource("Scanner");
+	SpawnResource("Modems");
+	SpawnResource("CD");
 }
 
 void ResourceManager::SpawnResource(string newResourceName)
@@ -19,51 +23,52 @@ void ResourceManager::AllocateResources(string resourceName, int numOfResources,
 {
 	vector<int> resourcesUsedForThisRun;
 	bool resourceFound = false;
-	for (int i = 0; i < resourceList.size(); i++)
+	
+	if (numOfResources != 0);
 	{
-		if (resourceList[i]->GetResourceName() == resourceName)
+		for (int i = 0; i < resourceList.size(); i++)
 		{
-			resourceFound = true;
-			if (resourceList[i]->GetInUse() == false)
+			if (resourceList[i]->GetResourceName() == resourceName)
 			{
-				resourceList[i]->SetInUse(true);
-				resourceList[i]->SetProcessID(ID);
-				numOfResources--;
-				resourcesUsedForThisRun.push_back(i);
-				if (numOfResources == 0);
+				resourceFound = true;
+				if (resourceList[i]->GetInUse() == false)
 				{
-					break;
+					resourceList[i]->SetInUse(true);
+					resourceList[i]->SetProcessID(ID);
+					numOfResources--;
+					resourcesUsedForThisRun.push_back(i);
+					if (numOfResources == 0);
+					{
+						break;
+					}
 				}
 			}
 		}
-	}
-	if (resourceFound == false)
-	{
-		throw "Resource Requested Does Not Exist";
-	}
-	else
-	{
-		if (numOfResources > 0)
+		if (resourceFound == false)
 		{
-			for (int i = 0; i < resourcesUsedForThisRun.size(); i++)
+			throw "Resource Requested Does Not Exist";
+		}
+		else
+		{
+			if (numOfResources > 0)
 			{
-				resourceList[resourcesUsedForThisRun[i]]->SetInUse(false);
+				for (int i = 0; i < resourcesUsedForThisRun.size(); i++)
+				{
+					resourceList[resourcesUsedForThisRun[i]]->SetInUse(false);
+				}
+				throw "Number of resources Requested out number resources availble";
 			}
-			throw "Number of resources Requested out number resources availble";
 		}
 	}
 }
 
-void ResourceManager::DeAllocateResources(string resourceName, int ID)
+void ResourceManager::DeAllocateResources(int ID)
 {
 	for (int i = 0; i < resourceList.size(); i++)
 	{
 		if (resourceList[i]->GetProcessID() == ID)
 		{
-			if (resourceList[i]->GetResourceName() == resourceName)
-			{
-				resourceList[i]->SetInUse(false);
-			}
+			resourceList[i]->SetInUse(false);
 		}
 	}
 }

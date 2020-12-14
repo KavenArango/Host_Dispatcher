@@ -11,7 +11,7 @@ public:
     void freeAllocation(int processID, int processSize);
 
 private:
-    int blockSize[1] = { 1024 };
+    int blockSize[6] = { 1024, 1024, 1024,1024,1024,1024 };
     vector<pair<int, int>> process;
-
+    int numofprocesses = 0;
 };

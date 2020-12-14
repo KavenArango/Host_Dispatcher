@@ -16,9 +16,10 @@ public:
 	ProcessManager();
 
 	void AddProcess(shared_ptr<Process>);
-	void ThreadJoin();
 	shared_ptr<CPU> GetCPU();
 	void SetCPU(shared_ptr<CPU>);
+	void print();
+	void RunProcesses();
 	
 
 	~ProcessManager()
@@ -26,7 +27,7 @@ public:
 
 private:
 	shared_ptr<Resource> resourceManager = shared_ptr<Resource>(new Resource());
-	shared_ptr<CPU> cpu = nullptr;
+	shared_ptr<CPU> cpu = shared_ptr<CPU>(new CPU());
 	
 	
 	shared_ptr<Process> AssignID(shared_ptr<Process>);
@@ -35,7 +36,6 @@ private:
 	void AddProcessToCpu();
 	void CheckValidPriority(shared_ptr<Process>);
 	void AssignQueue(shared_ptr<Process>);
-	void SingleAddProcessToCpu();
 	
 	const int NUMPRIORITYQUEUES = 4;
 	queue<shared_ptr<Process>> processQueues[4];

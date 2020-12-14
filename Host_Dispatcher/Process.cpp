@@ -2,7 +2,7 @@
 
 Process::Process()
 {}
-Process::Process(int aTime,int pri, float pTime, int mem, int newPrint, int newScanner, int newModem, int newCDs)
+Process::Process(int aTime,int pri, int pTime, int mem, int newPrint, int newScanner, int newModem, int newCDs)
 {
     SetPriority(pri);
     SetProcessTime(pTime);
@@ -232,7 +232,7 @@ void Process::SetPriority(int newPriority)
 
 
 
-float Process::GetProcessTime()
+int Process::GetProcessTime()
 {
     return processTime;
 }
@@ -248,7 +248,7 @@ void Process::SetProcessTime(string newPTime)
     }
     processTime = testPTime;
 }
-void Process::SetProcessTime(float newPTime)
+void Process::SetProcessTime(int newPTime)
 {
     if (newPTime < 0)
     {

@@ -1,7 +1,6 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <memory>
 
 #include "Process.h"
 #include "ProcessManager.h"
@@ -16,8 +15,7 @@ int main()
     int badProcesses = 0;
     shared_ptr<Process> currentProcess = shared_ptr<Process>(new Process());
     shared_ptr<ProcessManager> processManager = shared_ptr<ProcessManager>(new ProcessManager());
-    shared_ptr<CPU> cpuClass = shared_ptr<CPU>(new CPU());
-    processManager->SetCPU(cpuClass);
+    
 	string line;
 	ifstream inFile;
 	inFile.open("Processes.txt");
@@ -41,7 +39,8 @@ int main()
             continue;
         }
     }
-
+    processManager->RunProcesses();
+    //processManager->print();
     cout << "num of Bad processes: " << badProcesses << endl;
 	return 0;
 }

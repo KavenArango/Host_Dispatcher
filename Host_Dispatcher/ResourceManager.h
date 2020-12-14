@@ -13,7 +13,7 @@ public:
 
 	void SpawnResource(string);
 	void AllocateResources(string, int,int);
-	void DeAllocateResources(string, int);
+	void DeAllocateResources(int);
 	
 	
 	~ResourceManager()
